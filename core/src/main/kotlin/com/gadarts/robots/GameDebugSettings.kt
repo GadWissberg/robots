@@ -2,5 +2,5 @@ package com.gadarts.robots
 
 object GameDebugSettings {
 
-    val DEBUG_INPUT: Boolean = true
+    const val CAMERA_DEBUG_INPUT: Boolean = false
 }
