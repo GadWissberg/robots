@@ -34,20 +34,10 @@ class AxisModelHandler : Disposable {
         axisModelZ.dispose()
     }
 
-    private fun transformAxisModel() {
-        scaleAxis()
-        axisModelInstanceX.transform.translate(0F, 0.1F, 0F)
-        axisModelInstanceY.transform.translate(0F, 0.1F, 0F)
-        axisModelInstanceZ.transform.translate(0F, 0.1F, 0F)
-    }
-
     private fun scaleAxis() {
         axisModelInstanceX.transform.scale(2F, 2F, 2F)
-        axisModelInstanceX.transform.translate(0F, 0.2F, 0F)
         axisModelInstanceY.transform.scale(2F, 2F, 2F)
-        axisModelInstanceY.transform.translate(0F, 0.2F, 0F)
         axisModelInstanceZ.transform.scale(2F, 2F, 2F)
-        axisModelInstanceZ.transform.translate(0F, 0.2F, 0F)
     }
 
     private fun createAxisModel(modelBuilder: ModelBuilder, dir: Vector3, color: Color): Model {
@@ -67,7 +57,7 @@ class AxisModelHandler : Disposable {
         axisModelInstanceY = ModelInstance(axisModelY)
         axisModelZ = createAxisModel(modelBuilder, auxVector3b.set(0F, 0F, 1F), Color.BLUE)
         axisModelInstanceZ = ModelInstance(axisModelZ)
-        transformAxisModel()
+        scaleAxis()
     }
 
     fun render(modelBatch: ModelBatch) {

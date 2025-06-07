@@ -48,7 +48,7 @@ class CameraSystem : GameEntitySystem(), InputProcessor {
         val renderData = gameSessionData.renderData
         val camera = renderData.camera
         camera.position.set(
-            auxVector3_1.set(16F, 16F, 16F)
+            auxVector3_1.set(2F, 4F, 2F)
         )
         camera.lookAt(Vector3.Zero)
     }
@@ -137,7 +137,7 @@ class CameraSystem : GameEntitySystem(), InputProcessor {
         private val auxVector3_2 = Vector3()
         private const val CAMERA_EDGE_MARGIN = 40
         private const val CAMERA_MAX_SPEED = 10F
-        private const val CAMERA_MIN_POSITION = 12F
+        private const val CAMERA_MIN_POSITION = 3F
         private const val CAMERA_MAX_POSITION = 40F
     }
 }

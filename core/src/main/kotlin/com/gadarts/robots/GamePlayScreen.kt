@@ -3,9 +3,10 @@ package com.gadarts.robots
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Screen
 import com.gadarts.robots.ecs.EcsManager
-import com.gadarts.robots.ecs.EntityBuilderImpl
+import com.gadarts.robots.ecs.EntityBuilder
 import com.gadarts.robots.systems.CameraSystem
 import com.gadarts.robots.systems.GameEntitySystem
+import com.gadarts.robots.systems.MapSystem
 import com.gadarts.robots.systems.data.GameSessionData
 import com.gadarts.robots.systems.render.RenderSystem
 
@@ -22,11 +23,12 @@ class GamePlayScreen :
     }
 
     override fun show() {
-        val entityBuilderImpl = EntityBuilderImpl()
-        EcsManager(engine, entityBuilderImpl)
+        val entityBuilder = EntityBuilder(engine)
+        EcsManager(engine, entityBuilder)
         val systems = listOf(
             RenderSystem(),
             CameraSystem(),
+            MapSystem(entityBuilder)
         )
         systems.forEach {
             engine.addSystem(it)

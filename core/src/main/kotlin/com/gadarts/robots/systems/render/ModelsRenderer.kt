@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.Disposable
-import com.badlogic.gdx.utils.TimeUtils
 import com.gadarts.robots.components.ComponentsMapper
 import com.gadarts.robots.components.GameModelInstance
 import com.gadarts.robots.systems.data.GameSessionDataRender
@@ -48,13 +47,6 @@ class ModelsRenderer(
         if (isVisible(entity, forShadow)) {
             val modelInstanceComponent = ComponentsMapper.modelInstance.get(entity)
             renderGameModelInstance(modelInstanceComponent.gameModelInstance, applyEnvironment, batch)
-            if (!modelInstanceComponent.hidden
-                && modelInstanceComponent.hideAt != -1L
-                && modelInstanceComponent.hideAt <= TimeUtils.millis()
-            ) {
-                modelInstanceComponent.hidden = true
-                modelInstanceComponent.hideAt = -1L
-            }
         }
     }
 
@@ -78,7 +70,6 @@ class ModelsRenderer(
         val dims: Vector3 = boundingBox.getDimensions(auxVector2)
 
         if (modelInsComp.hidden) return false
-        if (dims.isZero) return false
 
         val center: Vector3 =
             gameModelInstance.modelInstance.transform.getTranslation(auxVector1)
