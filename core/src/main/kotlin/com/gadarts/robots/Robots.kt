@@ -4,10 +4,13 @@ import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputMultiplexer
+import com.gadarts.robots.assets.GameAssetManager
 
-/** [com.badlogic.gdx.ApplicationListener] implementation shared by all platforms. */
 class Robots : Game() {
+    private val assetsManager: GameAssetManager by lazy { GameAssetManager() }
+
     override fun create() {
+        assetsManager.loadAssets()
         val screenWidth = Gdx.graphics.displayMode.width
         val screenHeight = Gdx.graphics.displayMode.height
         val targetWidth = (screenWidth * 0.85).toInt().coerceAtMost(MAX_RESOLUTION_WIDTH)
@@ -16,7 +19,7 @@ class Robots : Game() {
         Gdx.input.setCatchKey(Input.Keys.BACK, true)
         Gdx.input.inputProcessor = InputMultiplexer()
         setScreen(
-            GamePlayScreen(
+            GamePlayScreen(assetsManager
             )
         )
     }

@@ -2,6 +2,7 @@ package com.gadarts.robots
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Screen
+import com.gadarts.robots.assets.GameAssetManager
 import com.gadarts.robots.ecs.EcsManager
 import com.gadarts.robots.ecs.EntityBuilder
 import com.gadarts.robots.systems.CameraSystem
@@ -10,7 +11,7 @@ import com.gadarts.robots.systems.MapSystem
 import com.gadarts.robots.systems.data.GameSessionData
 import com.gadarts.robots.systems.render.RenderSystem
 
-class GamePlayScreen :
+class GamePlayScreen(private val assetsManager: GameAssetManager) :
     Screen {
     private val engine: PooledEngine by lazy { PooledEngine() }
     private val gameSessionData: GameSessionData by lazy {
@@ -28,7 +29,8 @@ class GamePlayScreen :
         val systems = listOf(
             RenderSystem(),
             CameraSystem(),
-            MapSystem(entityBuilder)
+            MapSystem(entityBuilder, assetsManager),
+            CharacterSystem()
         )
         systems.forEach {
             engine.addSystem(it)

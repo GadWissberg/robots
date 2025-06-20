@@ -8,7 +8,7 @@ enum class ModelDefinition(
 ) :
     AssetDefinition<Model> {
 
-    ;
+    COW;
 
     private val pathFormat = "models/%s.g3dj"
     private val paths = ArrayList<String>()

@@ -9,11 +9,14 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder
 import com.badlogic.gdx.math.Vector3
+import com.gadarts.robots.assets.GameAssetManager
 import com.gadarts.robots.components.GameModelInstance
+import com.gadarts.robots.definitions.ModelDefinition
 import com.gadarts.robots.ecs.EntityBuilder
 import com.gadarts.robots.systems.data.GameSessionData
 
-class MapSystem(private val entityBuilder: EntityBuilder) : GameEntitySystem() {
+class MapSystem(private val entityBuilder: EntityBuilder, private val assetsManager: GameAssetManager) :
+    GameEntitySystem() {
     private var mapGrid: Array<Array<ModelInstance?>>
     private var blockModel: Model
 
@@ -28,6 +31,15 @@ class MapSystem(private val entityBuilder: EntityBuilder) : GameEntitySystem() {
         addBlock(0, 1)
         addBlock(0, 2)
         addBlock(1, 0)
+        addPlayerCharacter(auxVector.set(0.5F, 0F, 0.5F))
+        addPlayerCharacter(auxVector.set(0.5F, 0F, 1.5F))
+    }
+
+    private fun addPlayerCharacter(position: Vector3?) {
+        entityBuilder.begin().addModelInstanceComponent(
+            GameModelInstance(ModelInstance(assetsManager.getAssetByDefinition(ModelDefinition.COW)), null),
+            position
+        ).finishAndAddToEngine()
     }
 
     private fun addBlock(z: Int, x: Int) {
@@ -74,5 +86,6 @@ class MapSystem(private val entityBuilder: EntityBuilder) : GameEntitySystem() {
 
     companion object {
         private const val MAPS_SIZE = 32
+        private val auxVector = Vector3()
     }
 }

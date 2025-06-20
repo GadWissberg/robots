@@ -48,7 +48,7 @@ class CameraSystem : GameEntitySystem(), InputProcessor {
         val renderData = gameSessionData.renderData
         val camera = renderData.camera
         camera.position.set(
-            auxVector3_1.set(2F, 4F, 2F)
+            auxVector3_1.set(4F, 8F, 4F)
         )
         camera.lookAt(Vector3.Zero)
     }
