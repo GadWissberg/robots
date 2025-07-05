@@ -3,6 +3,7 @@ package com.gadarts.robots.systems
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.InputProcessor
+import com.badlogic.gdx.ai.msg.MessageDispatcher
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
@@ -10,7 +11,7 @@ import com.badlogic.gdx.math.Vector3
 import com.gadarts.robots.GameDebugSettings
 import com.gadarts.robots.systems.data.GameSessionData
 
-class CameraSystem : GameEntitySystem(), InputProcessor {
+class CameraSystem(messageDispatcher: MessageDispatcher) : GameEntitySystem(messageDispatcher), InputProcessor {
     private val debugInput: CameraInputController by lazy { CameraInputController(gameSessionData.renderData.camera) }
     private val cameraPanVelocity = Vector2()
     private var mouseX = 0
@@ -85,7 +86,7 @@ class CameraSystem : GameEntitySystem(), InputProcessor {
     override fun mouseMoved(screenX: Int, screenY: Int): Boolean {
         mouseX = screenX
         mouseY = screenY
-        return true
+        return false
     }
 
     private fun smoothDamp(current: Float, target: Float): Float {

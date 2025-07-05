@@ -27,4 +27,9 @@ class EntityBuilder(private val engine: PooledEngine) {
         engine.addEntity(currentEntity)
         currentEntity = null
     }
+
+    fun addCharacterComponent(): EntityBuilder {
+        currentEntity!!.add(CharacterComponent())
+        return this
+    }
 }

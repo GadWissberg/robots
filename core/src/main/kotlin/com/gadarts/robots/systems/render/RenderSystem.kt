@@ -1,6 +1,7 @@
 package com.gadarts.robots.systems.render
 
 import com.badlogic.ashley.core.Family
+import com.badlogic.gdx.ai.msg.MessageDispatcher
 import com.badlogic.gdx.graphics.g3d.ModelBatch
 import com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch
@@ -10,7 +11,7 @@ import com.gadarts.robots.components.ModelInstanceComponent
 import com.gadarts.robots.systems.GameEntitySystem
 import com.gadarts.robots.systems.data.GameSessionData
 
-class RenderSystem : GameEntitySystem() {
+class RenderSystem(messageDispatcher: MessageDispatcher) : GameEntitySystem(messageDispatcher) {
     private val relatedEntities: RenderSystemRelatedEntities by lazy {
         RenderSystemRelatedEntities(
             engine!!.getEntitiesFor(

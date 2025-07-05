@@ -12,4 +12,7 @@ class GameSessionData(
         renderData.dispose()
     }
 
+    companion object {
+        const val MAP_SIZE = 32
+    }
 }
